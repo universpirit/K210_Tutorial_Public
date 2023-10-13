@@ -1,4 +1,5 @@
 # K210 Tutorial
+Copyright © 2023 宏宇創新有限公司，保留所有權利； Universpirit Innovation Limited. All rights reserved.
 ___________
 ## Table of content
 - [x] [Setup](https://github.com/universpirit/K210_Tutorial_Public/tree/main#setup)
