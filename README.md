@@ -26,9 +26,9 @@ ___________
    Unzip the file
 3. 運行檔案```maixpy-ide-windows-0.2.5```並完成安裝，途中需要選擇```是```以使用系統管理員權限<br>
    Execute ```maixpy-ide-windows-0.2.5``` and finish the installation, you need to choose ```Yes``` to run it with admin's right
-### Step 3 - K210 firmware
-1. 打開[k210_fimware](Setup/Windows/MaixPyIDE/maixpy-ide-windows-0.2.5.exe.zip)鏈接並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
-   Click on the link [k210_fimware](Setup/Windows/MaixPyIDE/maixpy-ide-windows-0.2.5.exe.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to begin the download
+### Step 3 - K210 firmware Setup/Windows/K210 firmware/k210_firmware.zip
+1. 打開[k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip)鏈接並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
+   Click on the link [k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to begin the download
 2. 解壓縮檔案<br>
    Unzip the file
 3. 使用USB Type-C線接駁MaixNano至電腦<br>
