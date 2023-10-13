@@ -11,8 +11,8 @@ ___________
 1. Windows 10
    <p>系統會自動安裝USB驅動<br>The system will automatically install the required USB driver</p>
 2. Windows 8
-   1. 打開[USB驅動](/Setup/Windows/USB%20driver/driver21228_Setup.zip)鏈接並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
-      Click on the link [USB driver](/Setup/Windows/USB%20driver/driver21228_Setup.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to begin the download
+   1. 打開[USB驅動](/Setup/Windows/USB%20driver/driver21228_Setup.zip)並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
+      Click [USB driver](/Setup/Windows/USB%20driver/driver21228_Setup.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to start downloading
    2. 解壓縮檔案<br>
       Unzip the file
    3. 運行檔案```CDM21228_Setup```並選擇```是```以使用系統管理員權限<br>
@@ -20,15 +20,15 @@ ___________
    4. 點選下一步完成安裝，途中需要選擇```I accept this argeement```<br>
       Finish the installation, you need to choose ```I accept this argeement``` in one of the steps
 ### Step 2 - MaixPy IDE
-1. 打開[MaixPy IDE](Setup/Windows/MaixPyIDE/maixpy-ide-windows-0.2.5.exe.zip)鏈接並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
-   Click on the link [MaixPy IDE](Setup/Windows/MaixPyIDE/maixpy-ide-windows-0.2.5.exe.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to begin the download
+1. 打開[MaixPy IDE](Setup/Windows/MaixPyIDE/maixpy-ide-windows-0.2.5.exe.zip)並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
+   Click [MaixPy IDE](Setup/Windows/MaixPyIDE/maixpy-ide-windows-0.2.5.exe.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to start downloading
 2. 解壓縮檔案<br>
    Unzip the file
 3. 運行檔案```maixpy-ide-windows-0.2.5```並完成安裝，途中需要選擇```是```以使用系統管理員權限<br>
    Execute ```maixpy-ide-windows-0.2.5``` and finish the installation, you need to choose ```Yes``` to run it with admin's right
 ### Step 3 - K210 firmware
-1. 打開[k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip)鏈接並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
-   Click on the link [k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to begin the download
+1. 打開[k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip)並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
+   Click [k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to start downloading
 2. 解壓縮檔案<br>
    Unzip the file
 3. 使用USB Type-C線接駁MaixNano至電腦<br>
