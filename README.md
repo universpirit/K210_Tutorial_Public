@@ -2,9 +2,9 @@
 ___________
 ## Table of content
 - [x] [Setup](https://github.com/universpirit/K210_Tutorial_Public/tree/main#setup)
-- [ ] Syntax
-- [ ] Program Body
-- [ ] Peripherals
+- [ ] [Syntax](https://github.com/universpirit/K210_Tutorial_Public/tree/main#syntax)
+- [ ] [Program Body](https://github.com/universpirit/K210_Tutorial_Public/tree/main#program-body)
+- [ ] [Peripherals](https://github.com/universpirit/K210_Tutorial_Public/tree/main#peripherals)
 ___________
 ## Setup
 ### Step 1 - USB driver
@@ -57,4 +57,13 @@ ___________
 7. 拔除USB Type-C線前，請先斷開MaixPy IDE與MaixNano之間的鏈接<br>
    Before unplugging the USB Type-C wire, please first disconnect the connection between MaixPy IDE and MaixNano<br>
    [<img src="/img/for%20setup/MaixPy_stop_program_icon.PNG" width="22">](#) &rarr; [<img src="/img/for%20setup/MaixPy_break_connection_icon.PNG" width="22">](#)
+___________
+## Syntax
+> 將於課堂上更新...<br>Will be released during lessons...
+___________
+## Program Body
+> 將於課堂上更新...<br>Will be released during lessons...
+___________
+## Peripherals
+> 將於課堂上更新...<br>Will be released during lessons...
 ___________
