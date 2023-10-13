@@ -1,7 +1,7 @@
 # K210 Tutorial
 ___________
 ## Table of content
-- [x] Setup
+- [x] [Setup](https://github.com/universpirit/K210_Tutorial_Public/tree/main#setup)
 - [ ] Syntax
 - [ ] Program Body
 - [ ] Peripherals
