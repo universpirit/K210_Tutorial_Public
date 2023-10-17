@@ -71,7 +71,7 @@ ___________
    Unzip the file
 3. 運行檔案```maixpy-ide-mac-0.2.5_2```，需要在```安全與隱私性```選擇```仍要打開```以運行軟件<br>
    Execute ```maixpy-ide-mac-0.2.5_2```, you need to go to ```Privacy & Security``` and select ```Open Anyway``` to run the software<br>
-   [<img src="/img/for%20setup/unauthorized_app_warn_mac.png" width="210">](#)[<img src="/img/for%20setup/unauthorized_app_setting_mac.png" width="350">](#)[<img src="/img/for%20setup/unauthorized_app_open_anyway_mac.png" width="349">](#)
+   [<img src="/img/for%20setup/unauthorized_app_warn_mac.png" width="210">](#)<br>[<img src="/img/for%20setup/unauthorized_app_setting_mac.png" width="350">](#)[<img src="/img/for%20setup/unauthorized_app_open_anyway_mac.png" width="349">](#)
 #### Step 3 - K210 firmware
 1. 打開[k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip)並點選右邊的[<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#)下載<br>
    Click [k210_fimware](Setup/Windows/K210%20firmware/k210_firmware.zip) and press [<img src="/img/for%20setup/github_download_icon.PNG" width="14">](#) on the right to start downloading
