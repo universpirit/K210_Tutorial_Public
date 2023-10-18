@@ -52,7 +52,7 @@ ___________
 4. 按左下角的[<img src="/img/for%20setup/MaixPy_link_connection_icon.PNG" width="20">](#)鏈接至MaixNano<br>
    Click [<img src="/img/for%20setup/MaixPy_link_connection_icon.PNG" width="20">](#) at the bottom right corner to connect to MaixNano
 5. 選擇適當的```COM port```<br>
-   Select the approate ```COM port```<br>
+   Select the appropriate ```COM port```<br>
    [<img src="/img/for%20setup/MaixPy_serial_port_selection.PNG" width="210">](#)
 6. 按左下角的[<img src="/img/for%20setup/MaixPy_start_program_icon.PNG" width="20">](#)運行程序<br>
    Click [<img src="/img/for%20setup/MaixPy_start_program_icon.PNG" width="20">](#) at the bottom right corner to run the program
@@ -97,7 +97,7 @@ ___________
 4. 按左下角的[<img src="/img/for%20setup/MaixPy_link_connection_icon.PNG" width="20">](#)鏈接至MaixNano<br>
    Click [<img src="/img/for%20setup/MaixPy_link_connection_icon.PNG" width="20">](#) at the bottom right corner to connect to MaixNano
 5. 選擇適當的```COM port```<br>
-   Select the approate ```COM port```<br>
+   Select the appropriate ```COM port```<br>
    [<img src="/img/for%20setup/MaixPy_serial_port_selection_mac.png" width="210">](#)
 6. 按左下角的[<img src="/img/for%20setup/MaixPy_start_program_icon.PNG" width="20">](#)運行程序<br>
    Click [<img src="/img/for%20setup/MaixPy_start_program_icon.PNG" width="20">](#) at the bottom right corner to run the program
