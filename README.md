@@ -6,7 +6,7 @@ ___________
 - [ ] [Syntax](https://github.com/universpirit/K210_Tutorial_Public/tree/main#syntax)
 - [ ] [Program Body](https://github.com/universpirit/K210_Tutorial_Public/tree/main#program-body)
 - [ ] [Peripherals](https://github.com/universpirit/K210_Tutorial_Public/tree/main#peripherals)
-- [ ] [Robot Control](https://github.com/universpirit/K210_Tutorial_Public/tree/main#probot-control)
+- [ ] [Robot Control](https://github.com/universpirit/K210_Tutorial_Public/tree/main#robot-control)
 ___________
 ## Setup
 ### Windows
