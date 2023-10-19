@@ -8,7 +8,16 @@ ___________
 - [ ] [Peripherals](https://github.com/universpirit/K210_Tutorial_Public/tree/main#peripherals)
 - [ ] [Robot Control](https://github.com/universpirit/K210_Tutorial_Public/tree/main#robot-control)
 ___________
+### Reminder
+1. 蘋果電腦用戶請攜帶有USB type-c轉USB的轉接頭<br>
+   Macbook user please bring along a USB type-c to USB adapter
+2. 上課前請先跟從以下指示下載及安裝適當的軟件<br>
+   Please follow the instructions below to download and install the required software before the lesson
+3. 上課前請先將電腦的電量充滿<br>
+   Please fully charge the computer before the lesson
+___________
 ## Setup
+
 ### Windows
 #### Step 1 - USB driver
 1. Windows 10
