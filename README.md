@@ -6,6 +6,7 @@ ___________
 - [ ] [Syntax](https://github.com/universpirit/K210_Tutorial_Public/tree/main#syntax)
 - [ ] [Program Body](https://github.com/universpirit/K210_Tutorial_Public/tree/main#program-body)
 - [ ] [Peripherals](https://github.com/universpirit/K210_Tutorial_Public/tree/main#peripherals)
+- [ ] [Robot Control](https://github.com/universpirit/K210_Tutorial_Public/tree/main#probot-control)
 ___________
 ## Setup
 ### Windows
@@ -112,5 +113,8 @@ ___________
 > 將於課堂上更新...<br>Will be released during lessons...
 ___________
 ## Peripherals
+> 將於課堂上更新...<br>Will be released during lessons...
+___________
+## Robot Control
 > 將於課堂上更新...<br>Will be released during lessons...
 ___________
