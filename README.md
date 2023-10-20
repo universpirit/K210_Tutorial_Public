@@ -19,6 +19,10 @@ ___________
 ## Setup
 
 ### Windows
+
+<details>
+<summary>按此打開 Click here</summary>
+
 #### Step 1 - USB driver
 1. Windows 10
    <p>系統會自動安裝USB驅動<br>The system will automatically install the required USB driver</p>
@@ -70,7 +74,13 @@ ___________
    Before unplugging the USB Type-C wire, please first disconnect the connection between MaixPy IDE and MaixNano<br>
    [<img src="/img/for%20setup/MaixPy_stop_program_icon.PNG" width="22">](#) &rarr; [<img src="/img/for%20setup/MaixPy_break_connection_icon.PNG" width="22">](#)
 
+</details>
+
 ### Mac OS
+
+<details>
+<summary>按此打開 Click here</summary>
+
 #### Step 1 - USB driver
 1. <p>系統會自動安裝USB驅動<br>The system will automatically install the required USB driver</p>
    
@@ -114,6 +124,9 @@ ___________
 7. 拔除USB Type-C線前，請先斷開MaixPy IDE與MaixNano之間的鏈接<br>
    Before unplugging the USB Type-C wire, please first disconnect the connection between MaixPy IDE and MaixNano<br>
    [<img src="/img/for%20setup/MaixPy_stop_program_icon.PNG" width="22">](#) &rarr; [<img src="/img/for%20setup/MaixPy_break_connection_icon.PNG" width="22">](#)
+
+</details>
+
 ___________
 ## Syntax
 > 將於課堂上更新...<br>Will be released during lessons...
