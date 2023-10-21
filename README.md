@@ -658,6 +658,514 @@ ___________
 
 [^6]: https://guidelines.pr1mer.tech/05-IconsImages/Image-Size-and-Resolution
 ___________
-## Robot Control
-> 將於課堂上更新...<br>Will be released during lessons...
+## 機器人控制 Robot Control
+### 圖像輸入 Image input
+
+1. 請把k210接駁到電腦
+2. 打開MaixPy IDE
+3. 按```File```&rarr;```New File...```打開新預設程序
+4. 鏈接到MaixNano
+5. 運行程序
+   image here
+6. 記錄影像
+   1. 對右上角圖像按```右鍵```&rarr;```save iamge to PC```，便可儲存當刻圖像至電腦
+   2. 按右上角```Record```&rarr;```Stop```，便可儲存錄像至電腦
+7. 按```Tools```&rarr;```Save open script to board(boot.py)```，便可將程序燒錄至MaixNano
+
+#### 圖像編輯
+請把以下代碼加入至適當位置，並在圖像中央畫出一個160*120的紅色長方形
+
+```python
+# draw_rectangle(x, y, w, h, color, thickness=1, fill=False)
+# x - x軸起點
+# y - y軸起點
+# w - 寬
+# h - 高
+# color - 顏色
+# thickness - 線條粗細
+# fill - 是否填滿
+img = img.draw_rectangle(?)
+```
+[<img src="/img/for%20tutorial/image_input_draw_rect.bmp" width="400">](#)
+
+### Motor control
+
+1. 請先複製以下代碼至MaixPy IDE
+
+<details>
+<summary>代碼 code</summary>
+
+```python
+import sensor, image, time
+from fpioa_manager import fm
+from machine import Timer, PWM
+from Maix import GPIO
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.skip_frames(time = 2000)
+
+tim00 = Timer(Timer.TIMER0, Timer.CHANNEL0, mode=Timer.MODE_PWM)
+tim02 = Timer(Timer.TIMER0, Timer.CHANNEL2, mode=Timer.MODE_PWM)
+ch0 = PWM(tim00, freq=500000, duty=0, pin=18)
+ch1 = PWM(tim02, freq=500000, duty=0, pin=19)
+
+fm.register(17,fm.fpioa.GPIO0)
+fm.register(13,fm.fpioa.GPIO1)
+lmf=GPIO(GPIO.GPIO0,GPIO.OUT)
+lmb=GPIO(GPIO.GPIO1,GPIO.OUT)
+# To Do
+def left_motor_forward():
+    lmf.value(?)
+    lmb.value(?)
+def left_motor_backward():
+    lmf.value(?)
+    lmb.value(?)
+def left_motor_stop():
+    lmf.value(0)
+    lmb.value(0)
+fm.register(10,fm.fpioa.GPIO2)
+fm.register(14,fm.fpioa.GPIO3)
+rmf=GPIO(GPIO.GPIO2,GPIO.OUT)
+rmb=GPIO(GPIO.GPIO3,GPIO.OUT)
+# To Do
+def right_motor_forward():
+    rmf.value(?)
+    rmb.value(?)
+def right_motor_backward():
+    rmf.value(?)
+    rmb.value(?)
+def right_motor_stop():
+    rmf.value(0)
+    rmb.value(0)
+
+# To Do
+# 請試出能驅動輪子旋轉的最低PWM
+pwm_min_left = ?
+pwm_min_right = ?
+
+print("start")
+print("left %d"%pwm_min_left)
+print("right %d"%pwm_min_right)
+
+left_motor_forward()
+ch0.duty(pwm_min_left)
+right_motor_forward()
+ch1.duty(pwm_min_right)
+
+time.sleep_ms(5000)
+
+left_motor_backward()
+ch0.duty(pwm_min_left)
+right_motor_backward()
+ch1.duty(pwm_min_right)
+
+time.sleep_ms(5000)
+
+left_motor_stop()
+ch0.duty(pwm_min_left)
+right_motor_stop()
+ch1.duty(pwm_min_right)
+
+while True:
+    img=sensor.snapshot()
+```
+
+</details>
+
+2. 調試PWM數值 (1-100) 並分別找出左右輪啟動最低值
+3. 微調以上數值直至機械人能走直線
+
+### Block detection & classification
+
+#### 尋找指定顏色的方塊
+
+1. 複製以下代碼至MaixPy IDE
+
+<details>
+<summary>代碼 code</summary>
+
+```python
+import sensor, image, time
+import math
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.skip_frames(time = 2000)
+sensor.set_auto_whitebal(True)
+
+# To Do
+# 分別找出紅綠藍的顏色閾值
+red_threshold   = (0,0,0,0,0,0)
+greed_threshold   = (0,0,0,0,0,0)
+blue_threshold   = (0,0,0,0,0,0)
+
+while True:
+   img=sensor.snapshot()
+   blobs = img.find_blobs([red_threshold])
+   for b in blobs:
+      img=img.draw_rectangle(b[0:4])
+      img=img.draw_cross(b.cx(), b.cy())
+      print("%d %d %d"%(b.h()*b.w(),b.cx(),b.cy()))
+   print("---")
+```
+
+</details>
+
+2. 按```tools```&rarr;```Machine Vision```&rarr;```Threshold Editor```打開閾值選擇軟件
+3. 拉動```L```、```A```及```B```的上下閾值去篩選出目標顏色<br>
+   [<img src="/img/for%20tutorial/MaixPy_IDE_Threshold_Editor.PNG" width="1200">](#)
+4. 把閾值範圍複製回代碼並執行
+
+#### 尋找最大的指定顏色方塊
+
+1. 複製以下代碼至MaixPy IDE並替代主while loop
+
+<details>
+<summary>代碼 code</summary>
+
+```python
+while True:
+   img=sensor.snapshot()
+   blobs = img.find_blobs([red_threshold])
+   b_largest = []
+   b_largest_area = 0
+   if blobs:
+       b_largest = blobs[0]
+       b_largest_area = blobs[0].h() * blobs[0].w()
+       for b in blobs:
+           b_area = b.h() * b.w()
+           # To Do
+           # 完成以下邏輯以篩選出最大的顏色區塊
+           if ???
+               b_largest_area = ???
+               b_largest = ???
+           img=img.draw_rectangle(b[0:4])
+           img=img.draw_cross(b[5], b[6])
+       c=img.get_pixel(b_largest.cx(), b_largest.cy())
+       img=img.draw_rectangle(b_largest[0:4],color=[0,0,0])
+       img=img.draw_cross(b_largest.cx(), b_largest.cy(),color=[0,0,0])
+       print(c)
+       print(b_largest_area)
+   print("---")
+```
+
+</details>
+
+2. 完成代碼並篩選出最大的顏色區塊<br>
+   [<img src="/img/for%20tutorial/MaixPy_IDE_largest_blob.bmp" width="400">](#)
+
+### Robot alignment control
+
+#### 追蹤顏色方塊
+> bang bang control
+1. 複製以下代碼至MaixPy IDE
+
+<details>
+<summary>代碼 code</summary>
+
+```python
+import sensor, image, time
+from fpioa_manager import fm
+from machine import Timer, PWM
+from Maix import GPIO
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.skip_frames(time = 2000)
+
+tim00 = Timer(Timer.TIMER0, Timer.CHANNEL0, mode=Timer.MODE_PWM)
+tim02 = Timer(Timer.TIMER0, Timer.CHANNEL2, mode=Timer.MODE_PWM)
+ch0 = PWM(tim00, freq=500000, duty=0, pin=18)
+ch1 = PWM(tim02, freq=500000, duty=0, pin=19)
+
+# To Do
+pwm_min_left = ？
+pwm_min_right = ?
+
+fm.register(17,fm.fpioa.GPIO0)
+fm.register(13,fm.fpioa.GPIO1)
+lmf=GPIO(GPIO.GPIO0,GPIO.OUT)
+lmb=GPIO(GPIO.GPIO1,GPIO.OUT)
+# To Do
+def left_motor_forward():
+    lmf.value(?)
+    lmb.value(?)
+def left_motor_backward():
+    lmf.value(?)
+    lmb.value(?)
+def left_motor_stop():
+    lmf.value(0)
+    lmb.value(0)
+def left_motor(speed):
+    if speed > 0:
+        left_motor_forward()
+    elif speed < 0:
+        left_motor_backward()
+        speed = -speed
+    else:
+        left_motor_stop()
+    duty = speed * (100-pwm_min_left)/100 + pwm_min_left
+    ch0.duty(duty)
+
+fm.register(10,fm.fpioa.GPIO2)
+fm.register(14,fm.fpioa.GPIO3)
+rmf=GPIO(GPIO.GPIO2,GPIO.OUT)
+rmb=GPIO(GPIO.GPIO3,GPIO.OUT)
+# To Do
+def right_motor_forward():
+    rmf.value(?)
+    rmb.value(?)
+def right_motor_backward():
+    rmf.value(?)
+    rmb.value(?)
+def right_motor_stop():
+    rmf.value(0)
+    rmb.value(0)
+def right_motor(speed):
+    if speed > 0:
+        right_motor_forward()
+    elif speed < 0:
+        right_motor_backward()
+        speed = -speed
+    else:
+        right_motor_stop()
+    duty = speed * (100-pwm_min_right)/100 + pwm_min_right
+    ch1.duty(duty)
+
+# To Do
+red_threshold   = (0, 0, 0, 0, 0, 0)
+greed_threshold   = (0, 0, 0, 0, 0, 0)
+blue_threshold   = (0, 0, 0, 0, 0, 0)
+
+# To Do
+mid_pos = ?
+
+while True:
+    img=sensor.snapshot()
+    blobs = img.find_blobs([red_threshold])
+    b_largest = []
+    b_largest_area = 0
+    if blobs:
+        b_largest = blobs[0]
+        b_largest_area = blobs[0].h() * blobs[0].w()
+        for b in blobs:
+            b_area = b.h() * b.w()
+            if b_area > b_largest_area:
+                b_largest_area = b_area
+                b_largest = b
+        c=img.get_pixel(b_largest.cx(), b_largest.cy())
+        img=img.draw_rectangle(b_largest[0:4])
+        img=img.draw_cross(b_largest.cx(), b_largest.cy())
+    if b_largest_area >= 3000:
+        if b_largest.cy() > mid_pos:
+            # To Do
+            left_motor(?)
+            right_motor(?)
+        else:
+            # To Do
+            left_motor(?)
+            right_motor(?)
+    else:
+        left_motor(0)
+        right_motor(0)
+```
+
+</details>
+
+2. 完成代碼並使機器人能左右追蹤顏色方塊
+
+> P controller
+1. 複製以下代碼至MaixPy IDE
+<details>
+<summary>代碼 code</summary>
+
+```python
+import sensor, image, time
+from fpioa_manager import fm
+from machine import Timer, PWM
+from Maix import GPIO
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.skip_frames(time = 2000)
+
+tim00 = Timer(Timer.TIMER0, Timer.CHANNEL0, mode=Timer.MODE_PWM)
+tim02 = Timer(Timer.TIMER0, Timer.CHANNEL2, mode=Timer.MODE_PWM)
+ch0 = PWM(tim00, freq=500000, duty=0, pin=18)
+ch1 = PWM(tim02, freq=500000, duty=0, pin=19)
+
+# To Do
+pwm_min_left = ？
+pwm_min_right = ?
+
+fm.register(17,fm.fpioa.GPIO0)
+fm.register(13,fm.fpioa.GPIO1)
+lmf=GPIO(GPIO.GPIO0,GPIO.OUT)
+lmb=GPIO(GPIO.GPIO1,GPIO.OUT)
+# To Do
+def left_motor_forward():
+    lmf.value(?)
+    lmb.value(?)
+def left_motor_backward():
+    lmf.value(?)
+    lmb.value(?)
+def left_motor_stop():
+    lmf.value(0)
+    lmb.value(0)
+def left_motor(speed):
+    if speed > 0:
+        left_motor_forward()
+    elif speed < 0:
+        left_motor_backward()
+        speed = -speed
+    else:
+        left_motor_stop()
+    duty = speed * (100-pwm_min_left)/100 + pwm_min_left
+    ch0.duty(duty)
+
+fm.register(10,fm.fpioa.GPIO2)
+fm.register(14,fm.fpioa.GPIO3)
+rmf=GPIO(GPIO.GPIO2,GPIO.OUT)
+rmb=GPIO(GPIO.GPIO3,GPIO.OUT)
+# To Do
+def right_motor_forward():
+    rmf.value(?)
+    rmb.value(?)
+def right_motor_backward():
+    rmf.value(?)
+    rmb.value(?)
+def right_motor_stop():
+    rmf.value(0)
+    rmb.value(0)
+def right_motor(speed):
+    if speed > 0:
+        right_motor_forward()
+    elif speed < 0:
+        right_motor_backward()
+        speed = -speed
+    else:
+        right_motor_stop()
+    duty = speed * (100-pwm_min_right)/100 + pwm_min_right
+    ch1.duty(duty)
+
+# To Do
+red_threshold   = (0, 0, 0, 0, 0, 0)
+greed_threshold   = (0, 0, 0, 0, 0, 0)
+blue_threshold   = (0, 0, 0, 0, 0, 0)
+
+# To Do
+mid_pos = ?
+
+while True:
+    img=sensor.snapshot()
+    blobs = img.find_blobs([red_threshold])
+    b_largest = []
+    b_largest_area = 0
+    if blobs:
+        b_largest = blobs[0]
+        b_largest_area = blobs[0].h() * blobs[0].w()
+        for b in blobs:
+            b_area = b.h() * b.w()
+            if b_area > b_largest_area:
+                b_largest_area = b_area
+                b_largest = b
+        c=img.get_pixel(b_largest.cx(), b_largest.cy())
+        img=img.draw_rectangle(b_largest[0:4])
+        img=img.draw_cross(b_largest.cx(), b_largest.cy())
+    if b_largest_area >= 3000:
+        err = mid_pos - b_largest.cy()
+        # To Do
+        kp = (int)(err*?)#~0.0x
+        print("error %d"%err)
+        print("kp %d"%kp)
+        left_motor(kp)
+        right_motor(-kp)
+    else:
+        left_motor(0)
+        right_motor(0)
+```
+
+</details>
+
+2. 完成左右P控制器代碼
+
+> 距離控制
+1. 複製以下代碼至MaixPy IDE並替代主while loop
+
+<details>
+<summary>代碼 code</summary>
+
+```python
+# To Do
+mid_pos = ?
+tar_size = ?
+
+while True:
+    img=sensor.snapshot()
+    blobs = img.find_blobs([red_threshold])
+    b_largest = []
+    b_largest_area = 0
+    if blobs:
+        b_largest = blobs[0]
+        b_largest_area = blobs[0].h() * blobs[0].w()
+        for b in blobs:
+            b_area = b.h() * b.w()
+            if b_area > b_largest_area:
+                b_largest_area = b_area
+                b_largest = b
+        c=img.get_pixel(b_largest.cx(), b_largest.cy())
+        img=img.draw_rectangle(b_largest[0:4])
+        img=img.draw_cross(b_largest.cx(), b_largest.cy())
+    if b_largest_area >= 1000:
+        angle_err = mid_pos - b_largest.cy()
+        # To Do
+        angle_kp = (int)(angle_err*?)#~0.0x
+        print("angle kp %d"%angle_kp)
+        dist_err = math.sqrt(tar_size) - math.sqrt(b_largest_area)
+        # To Do
+        dist_kp = (int)(dist_err*?)#~0.0x
+        print("dist kp %d"%dist_kp)
+        left_motor(dist_kp + angle_kp)
+        right_motor(dist_kp - angle_kp)
+    else:
+        left_motor(0)
+        right_motor(0)
+```
+
+</details>
+
+2. 完成前後P控制器代碼
+___________
+## Useful Links
+### Public Repo
+- [Public Repo](https://github.com/universpirit/K210_Tutorial_Public)
+### Sipeed Library
+- [GPIO](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/Maix/gpio.html)
+- [PWM](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/machine/pwm.html)
+- [Sensor](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/machine_vision/sensor.html) (Camera)
+- [Image](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/machine_vision/image/image.html)
+- [FPIOA](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/Maix/fpioa.html)
+- [UART](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/machine/uart.html)
+- [I2C](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/machine/i2c.html)
+- [SPI](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/machine/spi.html)
+- [KPU](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/Maix/kpu.html)
+### Helper Library
+- [cmath](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/standard/cmath.html)
+- [math](https://wiki.sipeed.com/soft/maixpy/zh/api_reference/standard/math.html)
+### OpenMV Library
+- [Image](https://docs.openmv.io/library/omv.image.html#module-image)
+   - [Blob](https://docs.openmv.io/library/omv.image.html#class-blob-blob-object)
+   - [Rect](https://docs.openmv.io/library/omv.image.html#class-rect-rectangle-object)
+   - [Circle](https://docs.openmv.io/library/omv.image.html#class-circle-circle-object)
+   - [Line](https://docs.openmv.io/library/omv.image.html#class-line-line-object)
+   - [QR Code](https://docs.openmv.io/library/omv.image.html#class-qrcode-qrcode-object)
+   - [April Tag](https://docs.openmv.io/library/omv.image.html#class-apriltag-apriltag-object)
+### Reference
+- [MaixPy Documentation](https://wiki.sipeed.com/soft/maixpy/zh/index.html)
+- [MaixPy Github](https://github.com/sipeed/MaixPy)
 ___________
