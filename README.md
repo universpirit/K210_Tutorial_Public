@@ -717,11 +717,11 @@ lmf=GPIO(GPIO.GPIO0,GPIO.OUT)
 lmb=GPIO(GPIO.GPIO1,GPIO.OUT)
 # To Do
 def left_motor_forward():
-    lmf.value(?)
-    lmb.value(?)
+    lmf.value(0)
+    lmb.value(1)
 def left_motor_backward():
-    lmf.value(?)
-    lmb.value(?)
+    lmf.value(1)
+    lmb.value(0)
 def left_motor_stop():
     lmf.value(0)
     lmb.value(0)
@@ -731,19 +731,19 @@ rmf=GPIO(GPIO.GPIO2,GPIO.OUT)
 rmb=GPIO(GPIO.GPIO3,GPIO.OUT)
 # To Do
 def right_motor_forward():
-    rmf.value(?)
-    rmb.value(?)
+    rmf.value(0)
+    rmb.value(1)
 def right_motor_backward():
-    rmf.value(?)
-    rmb.value(?)
+    rmf.value(1)
+    rmb.value(0)
 def right_motor_stop():
     rmf.value(0)
     rmb.value(0)
 
 # To Do
 # 請試出能驅動輪子旋轉的最低PWM
-pwm_min_left = ?
-pwm_min_right = ?
+pwm_min_left = 40
+pwm_min_right = 40
 
 print("start")
 print("left %d"%pwm_min_left)
@@ -883,8 +883,8 @@ ch0 = PWM(tim00, freq=500000, duty=0, pin=18)
 ch1 = PWM(tim02, freq=500000, duty=0, pin=19)
 
 # To Do
-pwm_min_left = ？
-pwm_min_right = ?
+pwm_min_left = 40
+pwm_min_right = 40
 
 fm.register(17,fm.fpioa.GPIO0)
 fm.register(13,fm.fpioa.GPIO1)
@@ -892,11 +892,11 @@ lmf=GPIO(GPIO.GPIO0,GPIO.OUT)
 lmb=GPIO(GPIO.GPIO1,GPIO.OUT)
 # To Do
 def left_motor_forward():
-    lmf.value(?)
-    lmb.value(?)
+    lmf.value(0)
+    lmb.value(1)
 def left_motor_backward():
-    lmf.value(?)
-    lmb.value(?)
+    lmf.value(1)
+    lmb.value(0)
 def left_motor_stop():
     lmf.value(0)
     lmb.value(0)
@@ -917,11 +917,11 @@ rmf=GPIO(GPIO.GPIO2,GPIO.OUT)
 rmb=GPIO(GPIO.GPIO3,GPIO.OUT)
 # To Do
 def right_motor_forward():
-    rmf.value(?)
-    rmb.value(?)
+    rmf.value(0)
+    rmb.value(1)
 def right_motor_backward():
-    rmf.value(?)
-    rmb.value(?)
+    rmf.value(1)
+    rmb.value(0)
 def right_motor_stop():
     rmf.value(0)
     rmb.value(0)
